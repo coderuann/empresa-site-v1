@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BLOCK — Sites institucionais construídos sobre mapeamento estratégico</title>
+<meta name="description" content="A BLOCK é um estúdio de tecnologia. Mapeamos a empresa, o público e o objetivo antes de construir o site institucional — o código vem depois da decisão.">
+<meta name="theme-color" content="#F7F5F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141311" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BLOCK">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="BLOCK — Sites institucionais construídos sobre mapeamento estratégico">
+<meta property="og:description" content="A BLOCK é um estúdio de tecnologia. Mapeamos a empresa, o público e o objetivo antes de construir o site institucional — o código vem depois da decisão.">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/system.css">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>
+/* Tema aplicado antes da primeira pintura — evita flash de tema errado. */
+(function(){try{var s=localStorage.getItem("block:theme"),m=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.setAttribute("data-theme",s||(m?"dark":"light"));}catch(e){}document.documentElement.classList.add("has-js");})();
+</script>
+<script src="assets/js/site.js" defer></script>
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+<!-- ===================== NAVBAR ===================== -->
+<header class="navbar">
+  <div class="wrap navbar__inner">
+    <a class="wordmark" href="index.html" aria-label="BLOCK — página inicial">
+      <svg class="wordmark__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+        <rect class="tile" width="48" height="48" rx="11"/>
+        <rect class="unit" x="9" y="9" width="13" height="13" rx="3"/>
+        <rect class="unit" x="26" y="9" width="13" height="13" rx="3"/>
+        <rect class="unit" x="9" y="26" width="13" height="13" rx="3"/>
+        <rect class="unit unit--accent" x="26" y="26" width="13" height="13" rx="3"/>
+      </svg>
+      BLOCK
+    </a>
+
+    <nav class="navbar__links" aria-label="Navegação principal">
+      <a href="metodo.html">Método</a>
+      <a href="servicos.html">Serviços</a>
+      <a href="trabalhos.html">Trabalhos</a>
+      <a href="contato.html">Contato</a>
+    </nav>
+
+    <div class="navbar__actions">
+      <button type="button" class="btn btn--ghost btn--icon theme-toggle" data-theme-toggle aria-label="Ativar modo escuro" aria-pressed="false">
+        <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <button type="button" class="btn btn--ghost btn--icon navbar__toggle" data-drawer-open aria-controls="drawer" aria-expanded="false" aria-label="Abrir menu de navegação">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <a class="btn btn--primary btn--sm navbar__cta" href="contato.html">Iniciar conversa</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== DRAWER MOBILE ===================== -->
+<div class="drawer" id="drawer" data-open="false" aria-hidden="true">
+  <div class="drawer__scrim" data-drawer-close aria-hidden="true"></div>
+  <div class="drawer__panel" role="dialog" aria-modal="true" aria-label="Menu de navegação">
+    <div class="drawer__head">
+      <span class="wordmark" aria-hidden="true">BLOCK</span>
+      <button type="button" class="btn btn--ghost btn--icon" data-drawer-close aria-label="Fechar menu de navegação">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <nav class="drawer__links" aria-label="Navegação principal — versão mobile">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="metodo.html">Método</a>
+      <a href="servicos.html">Serviços</a>
+      <a href="trabalhos.html">Trabalhos</a>
+      <a href="contato.html">Contato</a>
+    </nav>
+    <a class="btn btn--primary btn--block drawer__cta" href="contato.html">Iniciar conversa</a>
+  </div>
+</div>
+
+<main id="conteudo">
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Estúdio de tecnologia</p>
+      <h1 class="t-display hero__title">Um site institucional só se justifica pelo problema que resolve<span class="dot">.</span></h1>
+      <p class="t-lead hero__lead">A BLOCK mapeia antes de construir: quem é a empresa, quem ela precisa alcançar e o que o site precisa resolver. O código vem depois da decisão — nunca antes.</p>
+      <div class="actions hero__actions">
+        <a class="btn btn--accent btn--lg" href="contato.html">Iniciar conversa</a>
+        <a class="btn btn--secondary btn--lg" href="metodo.html">Ver o método</a>
+      </div>
+
+      <div class="metarow">
+        <div>Foco atual<b>Sites institucionais</b></div>
+        <div>Processo<b>4 etapas mapeadas</b></div>
+        <div>Escopo<b>Aberto para tecnologia</b></div>
+        <div>Status<b>Primeiros projetos em andamento</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== DIAGNÓSTICO ===================== -->
+  <section class="section section--sunken" aria-labelledby="diagnostico-titulo">
+    <div class="wrap split reveal">
+      <div class="split__aside">
+        <p class="eyebrow">01 / Diagnóstico</p>
+        <h2 id="diagnostico-titulo">O pedido chega pronto. O motivo, quase nunca.</h2>
+      </div>
+      <div class="split__main argument__body">
+        <p class="t-body">&ldquo;Precisamos de um site novo&rdquo; é um pedido de entrega, não um diagnóstico. Vem sem a pergunta que deveria vir antes: novo para resolver o quê?</p>
+        <p>Sem essa resposta, o resultado é previsível — um site que existe, tem boas fotos, carrega rápido e não muda nada no negócio. A empresa trocou de fachada e chamou isso de projeto.</p>
+        <p>A BLOCK trata o site como consequência de uma decisão. Primeiro entendemos o que precisa mudar; depois definimos se um site é a resposta, e qual site é a resposta.</p>
+
+        <ol class="list-numbered mt-xl">
+          <li>
+            <div>
+              <h3>Público indefinido</h3>
+              <p>Um site escrito para &ldquo;todo mundo&rdquo; não convence ninguém. Sem público nomeado, cada texto vira genérico por segurança.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3>Objetivo ausente</h3>
+              <p>Se ninguém consegue dizer o que o site precisa provocar — contato, credibilidade, recrutamento —, não existe critério para avaliar se ele funcionou.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3>Estrutura herdada</h3>
+              <p>Copiar a arquitetura do concorrente importa junto os problemas dele. A estrutura tem que sair do que a empresa realmente faz.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SERVIÇOS ===================== -->
+  <section class="section" aria-labelledby="servicos-titulo">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="eyebrow">02 / Serviços</p>
+        <h2 id="servicos-titulo" class="measure-title">Duas frentes. Uma delas começa hoje.</h2>
+        <p class="t-lead mt-lg">O site institucional é o carro-chefe e está inteiramente definido. A segunda frente existe porque demanda de tecnologia raramente para no site — e é descrita sem promessa do que ainda não está fechado.</p>
+      </div>
+
+      <div class="svc-grid reveal mt-2xl">
+        <article class="card svc-card">
+          <div class="svc-card__head">
+            <span class="svc-card__index">01</span>
+            <span class="badge badge--info">Serviço principal</span>
+          </div>
+          <h3>Desenvolvimento de Sites Institucionais</h3>
+          <p>Site construído a partir de um mapeamento estratégico. A entrega inclui o raciocínio que levou até ela: arquitetura, hierarquia de mensagem e a razão de cada seção existir.</p>
+          <ul>
+            <li>Mapeamento de identidade, público e objetivo de negócio</li>
+            <li>Arquitetura de informação e hierarquia de mensagem</li>
+            <li>Desenvolvimento próprio, sem construtor genérico</li>
+            <li>Responsivo, acessível e rápido por padrão</li>
+          </ul>
+          <div class="svc-card__foot">
+            <a class="btn btn--secondary btn--sm" href="servicos.html#sites-institucionais">
+              Ver o serviço em detalhe
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="card svc-card">
+          <div class="svc-card__head">
+            <span class="svc-card__index">02</span>
+            <span class="badge badge--neutral">Escopo aberto</span>
+          </div>
+          <h3>Soluções em Tecnologia</h3>
+          <p>A BLOCK é um estúdio de tecnologia, não uma fábrica de sites. Quando a demanda passa do institucional — uma integração, uma automação, uma ferramenta interna —, o escopo é avaliado caso a caso.</p>
+          <ul>
+            <li>Avaliação técnica antes de qualquer proposta</li>
+            <li>Escopo definido em conjunto e registrado por escrito</li>
+            <li>Recusa explícita quando não somos a melhor opção</li>
+          </ul>
+          <div class="svc-card__foot">
+            <a class="btn btn--secondary btn--sm" href="servicos.html#solucoes-tecnologia">
+              Entender o escopo
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== MÉTODO (PRÉVIA) ===================== -->
+  <section class="section section--sunken" aria-labelledby="metodo-titulo">
+    <div class="wrap split reveal">
+      <div class="split__aside">
+        <p class="eyebrow">03 / Método</p>
+        <h2 id="metodo-titulo">Quatro etapas — e nenhuma delas começa pelo código.</h2>
+        <div class="actions mt-xl">
+          <a class="btn btn--secondary" href="metodo.html">
+            Ver o método completo
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="split__main">
+        <ol class="list-numbered">
+          <li>
+            <div>
+              <h3>Descoberta</h3>
+              <p>Entendemos a empresa antes de falar de site: o que ela faz, para quem, como vende e o que trava hoje. Nada é proposto nesta etapa.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3>Mapeamento estratégico</h3>
+              <p>Cruzamos identidade, público e objetivo para definir o que o site precisa resolver — e o que fica de fora.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3>Construção</h3>
+              <p>O desenvolvimento executa o que foi mapeado, com responsividade, acessibilidade e desempenho tratados desde a primeira tela.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3>Entrega e evolução</h3>
+              <p>Publicamos, transferimos o acesso e abrimos a lista de próximos passos — novas páginas, integrações ou outras frentes de tecnologia.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CTA ===================== -->
+  <section class="cta reveal" aria-labelledby="cta-titulo">
+    <div class="wrap">
+      <p class="eyebrow">Próximo passo</p>
+      <h2 id="cta-titulo">A conversa começa por uma pergunta: o que precisa mudar?</h2>
+      <p class="t-lead">Se você ainda não sabe responder, tudo bem — organizar isso é exatamente o trabalho da primeira etapa. Descreva o contexto e a gente parte daí.</p>
+      <div class="actions">
+        <a class="btn btn--primary btn--lg" href="contato.html">Iniciar conversa</a>
+        <a class="btn btn--secondary btn--lg" href="servicos.html">Ver serviços</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <span class="wordmark">
+          <svg class="wordmark__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+            <rect class="tile" width="48" height="48" rx="11"/>
+            <rect class="unit" x="9" y="9" width="13" height="13" rx="3"/>
+            <rect class="unit" x="26" y="9" width="13" height="13" rx="3"/>
+            <rect class="unit" x="9" y="26" width="13" height="13" rx="3"/>
+            <rect class="unit unit--accent" x="26" y="26" width="13" height="13" rx="3"/>
+          </svg>
+          BLOCK
+        </span>
+        <p>Estúdio de tecnologia. Sites institucionais construídos sobre mapeamento estratégico — e uma frente aberta para o que vem depois.</p>
+      </div>
+
+      <div class="footer__col">
+        <h2>Navegação</h2>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="metodo.html">Método</a></li>
+          <li><a href="servicos.html">Serviços</a></li>
+          <li><a href="trabalhos.html">Trabalhos</a></li>
+          <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h2>Contato</h2>
+        <ul>
+          <li><a href="contato.html">Formulário</a></li>
+          <li><span class="pending">E-mail <span class="badge badge--warning">Pendente</span></span></li>
+          <li><span class="pending">LinkedIn <span class="badge badge--warning">Pendente</span></span></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h2>Fundação</h2>
+        <ul>
+          <li><span class="pending">Design System v1.0</span></li>
+          <li><span class="pending">Identidade visual v1.0</span></li>
+          <li><span class="pending">Contraste AA verificado</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bar">
+      <span>&copy; <span data-year>2026</span> BLOCK. Todos os direitos reservados.</span>
+      <span>Design System v1.0 &middot; Light + Dark</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

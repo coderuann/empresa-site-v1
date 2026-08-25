@@ -1,0 +1,39 @@
+# ============================================================================
+# BLOCK — Netlify
+# O site estático mora em site/. O único passo de build é levar o robots.txt
+# da raiz do projeto para dentro da pasta publicada, mantendo uma fonte de
+# verdade só. Nenhuma dependência Node é instalada.
+# ============================================================================
+
+[build]
+  publish = "site"
+  command = "cp robots.txt site/robots.txt"
+
+# URLs limpas: /metodo resolve para /metodo.html
+[build.processing]
+  skip_processing = false
+
+# ---------------------------------------------------------------------------
+# Cabeçalhos
+# ---------------------------------------------------------------------------
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), interest-cohort=()"
+
+# HTML sempre revalidado — a navegação precisa refletir o último deploy.
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Assets sem hash no nome: cache de um dia, não "immutable".
+# Se um dia o build passar a versionar os arquivos, este valor pode subir.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"

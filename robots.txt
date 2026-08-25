@@ -1,0 +1,13 @@
+# BLOCK — robots.txt
+# Fonte de verdade única. O build de deploy copia este arquivo para dentro
+# de site/ (ver netlify.toml e vercel.json).
+
+User-agent: *
+Allow: /
+
+# Documentos de fundação não fazem parte do site público.
+Disallow: /design-system.html
+Disallow: /identidade-visual.pdf
+
+# Sitemap: descomente e preencha assim que o domínio definitivo for registrado.
+# Sitemap: https://SEU-DOMINIO/sitemap.xml

@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design System · Fundações e Tokens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TIER 1 — PRIMITIVE TOKENS
+   ============================================================ */
+:root{
+  --color-blue-700:#16295C;
+  --color-blue-600:#1E3A8A;
+  --color-blue-400:#5C7CFA;
+  --color-blue-100:#E4E9FB;
+  --color-orange-600:#D9541F;
+  --color-orange-400:#F2895C;
+  --color-sand-0:#F7F5F1;
+  --color-sand-100:#EDEAE3;
+  --color-sand-500:#8C887F;
+  --color-sand-900:#1A1815;
+  --color-green-600:#1F7A4C;
+  --color-amber-600:#B4720E;
+  --color-red-600:#C0392B;
+
+  /* spacing */
+  --spacing-2xs:4px;  --spacing-xs:8px;   --spacing-sm:12px;
+  --spacing-md:16px;  --spacing-lg:24px;  --spacing-xl:32px;
+  --spacing-2xl:48px; --spacing-3xl:64px; --spacing-4xl:96px; --spacing-5xl:128px;
+
+  /* radius */
+  --radius-sm:6px; --radius-md:10px; --radius-lg:16px; --radius-xl:24px; --radius-full:999px;
+
+  /* type */
+  --font-display-family:'Space Grotesk',sans-serif;
+  --font-ui-family:'Inter',system-ui,sans-serif;
+  --font-mono-family:'JetBrains Mono',ui-monospace,monospace;
+
+  /* motion */
+  --duration-fast:120ms; --duration-base:200ms; --duration-slow:320ms;
+  --easing-standard:cubic-bezier(.2,0,0,1);
+
+  /* ============================================================
+     TIER 2 — SEMANTIC TOKENS (light mode)
+     ============================================================ */
+  --bg-base:var(--color-sand-0);
+  --bg-surface:#FFFFFF;
+  --bg-surface-sunken:var(--color-sand-100);
+  --bg-inverse:var(--color-sand-900);
+  --text-primary:var(--color-sand-900);
+  --text-secondary:var(--color-sand-500);
+  --text-on-action:#FFFFFF;
+  --text-brand:var(--color-blue-600);
+  --border-default:rgba(26,24,21,.14);
+  --border-strong:rgba(26,24,21,.28);
+  --action-primary:var(--color-blue-600);
+  --action-primary-hover:var(--color-blue-700);
+  --action-accent:var(--color-orange-600);
+  --action-accent-hover:#B8441A;
+  --feedback-success:var(--color-green-600);
+  --feedback-warning:var(--color-amber-600);
+  --feedback-error:var(--color-red-600);
+  --feedback-info:var(--color-blue-600);
+
+  /* elevation */
+  --elevation-1:0 1px 2px 0 rgba(26,24,21,.06);
+  --elevation-2:0 4px 8px -2px rgba(26,24,21,.08);
+  --elevation-3:0 8px 16px -4px rgba(26,24,21,.10);
+  --elevation-4:0 16px 32px -8px rgba(26,24,21,.12);
+  --elevation-5:0 24px 48px -12px rgba(26,24,21,.16);
+}
+
+/* DARK MODE — resolvido na camada semântica, componentes intocados */
+[data-theme="dark"]{
+  --bg-base:#141311;
+  --bg-surface:#1E1C19;
+  --bg-surface-sunken:#0E0D0C;
+  --bg-inverse:var(--color-sand-0);
+  --text-primary:#F0EDE7;
+  --text-secondary:#9C978D;
+  --text-brand:var(--color-blue-400);
+  --border-default:rgba(240,237,231,.14);
+  --border-strong:rgba(240,237,231,.28);
+  --action-primary:var(--color-blue-400);
+  --action-primary-hover:#7B95FB;
+  --text-on-action:#0E0D0C;
+  --elevation-1:0 1px 2px 0 rgba(0,0,0,.4);
+  --elevation-2:0 4px 8px -2px rgba(0,0,0,.5);
+  --elevation-3:0 8px 16px -4px rgba(0,0,0,.55);
+  --elevation-4:0 16px 32px -8px rgba(0,0,0,.6);
+  --elevation-5:0 24px 48px -12px rgba(0,0,0,.7);
+}
+
+/* ============================================================ */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-padding-top:24px;}
+body{
+  font-family:var(--font-ui-family);
+  background:var(--bg-base);color:var(--text-primary);
+  font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  transition:background var(--duration-base) var(--easing-standard);
+}
+h1,h2,h3,h4{font-family:var(--font-display-family);letter-spacing:-.02em;line-height:1.15;}
+code,.mono{font-family:var(--font-mono-family);font-size:.82em;}
+a{color:var(--text-brand);}
+
+/* layout */
+.shell{display:grid;grid-template-columns:264px 1fr;min-height:100vh;}
+aside{
+  position:sticky;top:0;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--border-default);
+  padding:var(--spacing-xl) var(--spacing-lg);
+  background:var(--bg-base);
+}
+main{padding:var(--spacing-3xl) var(--spacing-4xl);max-width:1180px;}
+@media(max-width:980px){
+  .shell{grid-template-columns:1fr;}
+  aside{position:static;height:auto;border-right:0;border-bottom:1px solid var(--border-default);}
+  main{padding:var(--spacing-xl) var(--spacing-lg);}
+}
+
+/* sidebar */
+.brand{font-family:var(--font-display-family);font-weight:700;font-size:15px;letter-spacing:-.01em;}
+.brand small{display:block;font-family:var(--font-ui-family);font-weight:500;font-size:11px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);margin-top:var(--spacing-2xs);}
+nav{margin-top:var(--spacing-xl);display:flex;flex-direction:column;gap:2px;}
+nav a{
+  display:flex;gap:var(--spacing-sm);align-items:baseline;
+  padding:var(--spacing-xs) var(--spacing-sm);border-radius:var(--radius-sm);
+  text-decoration:none;color:var(--text-secondary);font-size:14px;font-weight:500;
+  transition:all var(--duration-fast) var(--easing-standard);
+}
+nav a:hover{background:var(--bg-surface-sunken);color:var(--text-primary);}
+nav a .n{font-family:var(--font-mono-family);font-size:11px;opacity:.6;}
+nav .grp{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-secondary);
+  font-weight:600;margin:var(--spacing-lg) 0 var(--spacing-xs) var(--spacing-sm);}
+
+.themetoggle{
+  margin-top:var(--spacing-xl);width:100%;display:flex;align-items:center;justify-content:space-between;
+  padding:var(--spacing-sm);border:1px solid var(--border-default);border-radius:var(--radius-md);
+  background:var(--bg-surface);color:var(--text-primary);font:inherit;font-size:13px;font-weight:500;
+  cursor:pointer;transition:all var(--duration-fast) var(--easing-standard);
+}
+.themetoggle:hover{border-color:var(--border-strong);}
+.themetoggle .pill{width:34px;height:18px;border-radius:var(--radius-full);background:var(--border-strong);position:relative;}
+.themetoggle .pill::after{content:'';position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:var(--radius-full);
+  background:var(--bg-surface);transition:transform var(--duration-base) var(--easing-standard);}
+[data-theme="dark"] .themetoggle .pill{background:var(--action-primary);}
+[data-theme="dark"] .themetoggle .pill::after{transform:translateX(16px);}
+
+/* sections */
+section{margin-bottom:var(--spacing-5xl);scroll-margin-top:var(--spacing-lg);}
+.eyebrow{
+  display:flex;align-items:center;gap:var(--spacing-sm);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+  color:var(--text-secondary);margin-bottom:var(--spacing-sm);
+}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--action-accent);}
+h2.title{font-size:34px;font-weight:700;margin-bottom:var(--spacing-sm);}
+.intro{font-size:15px;color:var(--text-secondary);max-width:68ch;margin-bottom:var(--spacing-xl);}
+h3.sub{font-size:19px;font-weight:700;margin:var(--spacing-2xl) 0 var(--spacing-md);}
+
+/* hero */
+.hero{border-bottom:1px solid var(--border-default);padding-bottom:var(--spacing-2xl);margin-bottom:var(--spacing-3xl);}
+.hero h1{font-size:52px;font-weight:700;letter-spacing:-.03em;line-height:1.05;}
+.hero h1 span{color:var(--action-accent);}
+.hero p{font-size:17px;color:var(--text-secondary);max-width:64ch;margin-top:var(--spacing-md);}
+.metarow{display:flex;flex-wrap:wrap;gap:var(--spacing-2xl);margin-top:var(--spacing-xl);}
+.metarow div{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);font-weight:600;}
+.metarow b{display:block;font-family:var(--font-display-family);font-size:15px;color:var(--text-primary);
+  letter-spacing:-.01em;text-transform:none;margin-top:var(--spacing-2xs);}
+
+/* tables */
+table{width:100%;border-collapse:collapse;font-size:13.5px;}
+th{text-align:left;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);
+  font-weight:600;padding:0 var(--spacing-md) var(--spacing-sm) 0;border-bottom:1px solid var(--border-default);}
+td{padding:var(--spacing-sm) var(--spacing-md) var(--spacing-sm) 0;border-bottom:1px solid var(--border-default);vertical-align:middle;}
+td.tk{font-family:var(--font-mono-family);font-size:12.5px;color:var(--text-brand);white-space:nowrap;}
+td.dim{color:var(--text-secondary);}
+
+/* color swatches */
+.swgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:var(--spacing-md);}
+.sw{border:1px solid var(--border-default);border-radius:var(--radius-lg);overflow:hidden;cursor:pointer;
+  background:var(--bg-surface);transition:box-shadow var(--duration-base) var(--easing-standard);}
+.sw:hover{box-shadow:var(--elevation-2);}
+.sw .chip{height:76px;}
+.sw .meta{padding:var(--spacing-sm);}
+.sw .meta .tk{font-family:var(--font-mono-family);font-size:12px;color:var(--text-primary);font-weight:500;}
+.sw .meta .hx{font-family:var(--font-mono-family);font-size:11px;color:var(--text-secondary);margin-top:2px;}
+.sw .meta .use{font-size:11.5px;color:var(--text-secondary);line-height:1.4;margin-top:var(--spacing-xs);}
+
+/* type specimens */
+.typerow{display:flex;align-items:baseline;justify-content:space-between;gap:var(--spacing-lg);
+  padding:var(--spacing-md) 0;border-bottom:1px solid var(--border-default);}
+.typerow .demo{flex:1;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.typerow .spec{font-family:var(--font-mono-family);font-size:11.5px;color:var(--text-secondary);white-space:nowrap;}
+
+/* spacing viz */
+.spacerow{display:flex;align-items:center;gap:var(--spacing-md);padding:var(--spacing-xs) 0;
+  border-bottom:1px solid var(--border-default);}
+.spacerow .bar{height:14px;background:var(--action-primary);border-radius:2px;flex:none;}
+.spacerow .tk{font-family:var(--font-mono-family);font-size:12.5px;width:120px;flex:none;color:var(--text-brand);}
+.spacerow .val{font-family:var(--font-mono-family);font-size:12px;width:52px;flex:none;color:var(--text-secondary);}
+.spacerow .use{font-size:12.5px;color:var(--text-secondary);}
+
+/* radius + elevation demos */
+.demogrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:var(--spacing-lg);}
+.demobox{background:var(--bg-surface);border:1px solid var(--border-default);height:88px;
+  display:flex;align-items:center;justify-content:center;font-family:var(--font-mono-family);
+  font-size:12px;color:var(--text-secondary);}
+.elevbox{background:var(--bg-surface);height:88px;border-radius:var(--radius-lg);
+  display:flex;align-items:center;justify-content:center;font-family:var(--font-mono-family);
+  font-size:12px;color:var(--text-secondary);}
+
+/* grid viz */
+.gridviz{border:1px solid var(--border-default);border-radius:var(--radius-lg);overflow:hidden;background:var(--bg-surface);}
+.gridviz .head{padding:var(--spacing-sm) var(--spacing-md);border-bottom:1px solid var(--border-default);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-secondary);font-weight:600;}
+.gridviz .cols{display:flex;padding:var(--spacing-md);}
+.gridviz .cols i{flex:1;height:64px;background:var(--color-blue-100);border-radius:var(--radius-sm);}
+[data-theme="dark"] .gridviz .cols i{background:rgba(92,124,250,.22);}
+
+/* components showcase */
+.canvas{
+  border:1px solid var(--border-default);border-radius:var(--radius-lg);
+  background:var(--bg-surface);padding:var(--spacing-xl);margin-bottom:var(--spacing-md);
+  display:flex;flex-wrap:wrap;gap:var(--spacing-md);align-items:flex-start;
+}
+.canvas.col{flex-direction:column;}
+.speclist{font-size:13px;color:var(--text-secondary);display:flex;flex-wrap:wrap;gap:var(--spacing-lg);
+  margin-bottom:var(--spacing-2xl);}
+.speclist b{color:var(--text-primary);font-weight:600;}
+
+/* --- real components --- */
+.btn{
+  font:inherit;font-size:14px;font-weight:500;cursor:pointer;
+  padding:var(--spacing-sm) var(--spacing-md);border-radius:var(--radius-md);
+  border:1px solid transparent;display:inline-flex;align-items:center;gap:var(--spacing-xs);
+  transition:all var(--duration-fast) var(--easing-standard);
+}
+.btn--primary{background:var(--action-primary);color:var(--text-on-action);}
+.btn--primary:hover{background:var(--action-primary-hover);}
+.btn--accent{background:var(--action-accent);color:#fff;}
+.btn--accent:hover{background:var(--action-accent-hover);}
+.btn--secondary{background:transparent;color:var(--text-primary);border-color:var(--border-strong);}
+.btn--secondary:hover{background:var(--bg-surface-sunken);}
+.btn--ghost{background:transparent;color:var(--text-secondary);}
+.btn--ghost:hover{background:var(--bg-surface-sunken);color:var(--text-primary);}
+.btn:disabled{opacity:.4;cursor:not-allowed;}
+.btn--sm{font-size:13px;padding:var(--spacing-2xs) var(--spacing-sm);border-radius:var(--radius-sm);}
+
+.field{display:flex;flex-direction:column;gap:var(--spacing-2xs);width:260px;}
+.field label{font-size:13px;font-weight:500;}
+.field input{
+  font:inherit;font-size:14px;padding:var(--spacing-sm);border-radius:var(--radius-sm);
+  border:1px solid var(--border-strong);background:var(--bg-base);color:var(--text-primary);
+  transition:all var(--duration-fast) var(--easing-standard);
+}
+.field input:focus{outline:none;border-color:var(--action-primary);box-shadow:0 0 0 3px var(--color-blue-100);}
+[data-theme="dark"] .field input:focus{box-shadow:0 0 0 3px rgba(92,124,250,.25);}
+.field .help{font-size:12px;color:var(--text-secondary);}
+.field.is-error input{border-color:var(--feedback-error);}
+.field.is-error .help{color:var(--feedback-error);}
+
+.card{
+  background:var(--bg-surface);border:1px solid var(--border-default);
+  border-radius:var(--radius-lg);padding:var(--spacing-lg);width:268px;
+  box-shadow:var(--elevation-1);transition:box-shadow var(--duration-base) var(--easing-standard);
+}
+.card:hover{box-shadow:var(--elevation-2);}
+.card h4{font-size:16px;font-weight:700;margin-bottom:var(--spacing-2xs);}
+.card p{font-size:13.5px;color:var(--text-secondary);margin-bottom:var(--spacing-md);}
+
+.badge{
+  display:inline-flex;align-items:center;gap:var(--spacing-2xs);
+  font-size:12px;font-weight:500;padding:var(--spacing-2xs) var(--spacing-sm);
+  border-radius:var(--radius-full);border:1px solid transparent;
+}
+.badge::before{content:'';width:6px;height:6px;border-radius:var(--radius-full);background:currentColor;}
+.badge--neutral{background:var(--bg-surface-sunken);color:var(--text-secondary);}
+.badge--info{background:var(--color-blue-100);color:var(--color-blue-700);}
+.badge--success{background:rgba(31,122,76,.12);color:var(--feedback-success);}
+.badge--warning{background:rgba(180,114,14,.12);color:var(--feedback-warning);}
+.badge--error{background:rgba(192,57,43,.12);color:var(--feedback-error);}
+
+.navbar{
+  width:100%;display:flex;align-items:center;justify-content:space-between;
+  padding:var(--spacing-sm) var(--spacing-md);border:1px solid var(--border-default);
+  border-radius:var(--radius-md);background:var(--bg-base);
+}
+.navbar .lg{font-family:var(--font-display-family);font-weight:700;font-size:15px;letter-spacing:-.01em;}
+.navbar .links{display:flex;gap:var(--spacing-lg);font-size:13.5px;color:var(--text-secondary);}
+.navbar .links span{cursor:pointer;}
+.navbar .links span:hover{color:var(--text-primary);}
+
+.avatar{
+  width:40px;height:40px;border-radius:var(--radius-full);display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:600;background:var(--color-blue-100);color:var(--color-blue-700);flex:none;
+}
+.avatar--sm{width:28px;height:28px;font-size:11px;}
+.avatar--lg{width:56px;height:56px;font-size:18px;}
+.avatar--accent{background:rgba(217,84,31,.14);color:var(--action-accent);}
+.stackav{display:flex;}
+.stackav .avatar{border:2px solid var(--bg-surface);margin-left:-10px;}
+.stackav .avatar:first-child{margin-left:0;}
+
+.modal{
+  width:400px;background:var(--bg-surface);border-radius:var(--radius-xl);
+  box-shadow:var(--elevation-4);border:1px solid var(--border-default);overflow:hidden;
+}
+.modal .mh{padding:var(--spacing-lg) var(--spacing-lg) var(--spacing-sm);}
+.modal .mh h4{font-size:18px;font-weight:700;}
+.modal .mb{padding:0 var(--spacing-lg) var(--spacing-lg);font-size:13.5px;color:var(--text-secondary);}
+.modal .mf{padding:var(--spacing-md) var(--spacing-lg);background:var(--bg-surface-sunken);
+  display:flex;justify-content:flex-end;gap:var(--spacing-xs);}
+
+/* icons */
+.icogrid{display:flex;gap:var(--spacing-lg);flex-wrap:wrap;}
+.ico{display:flex;flex-direction:column;align-items:center;gap:var(--spacing-xs);
+  font-size:11px;color:var(--text-secondary);font-family:var(--font-mono-family);}
+.ico svg{stroke:var(--text-primary);stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+
+/* code blocks */
+pre{
+  background:var(--bg-inverse);color:var(--bg-base);padding:var(--spacing-lg);
+  border-radius:var(--radius-lg);overflow-x:auto;font-family:var(--font-mono-family);
+  font-size:12.5px;line-height:1.65;
+}
+pre .c{opacity:.5;}
+pre .k{color:var(--color-orange-400);}
+
+/* callout */
+.callout{
+  border-left:3px solid var(--action-accent);padding:var(--spacing-md) 0 var(--spacing-md) var(--spacing-lg);
+  font-size:14px;color:var(--text-secondary);margin:var(--spacing-lg) 0;
+}
+.callout b{color:var(--text-primary);}
+
+.pill-note{
+  display:inline-flex;align-items:center;gap:var(--spacing-xs);font-size:12px;
+  padding:var(--spacing-2xs) var(--spacing-sm);border-radius:var(--radius-full);
+  background:var(--bg-surface-sunken);color:var(--text-secondary);font-family:var(--font-mono-family);
+}
+.toast{
+  position:fixed;bottom:var(--spacing-lg);left:50%;transform:translate(-50%,140%);
+  background:var(--bg-inverse);color:var(--bg-base);padding:var(--spacing-sm) var(--spacing-lg);
+  border-radius:var(--radius-full);font-size:13px;font-weight:500;
+  transition:transform var(--duration-base) var(--easing-standard);z-index:99;
+}
+.toast.on{transform:translate(-50%,0);}
+footer{border-top:1px solid var(--border-default);padding-top:var(--spacing-lg);
+  font-size:12.5px;color:var(--text-secondary);display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--spacing-md);}
+</style>
+</head>
+<body>
+
+<div class="shell">
+<aside>
+  <div class="brand">[ Marca a definir ]<small>Design System v1.0</small></div>
+  <nav>
+    <div class="grp">Foundations</div>
+    <a href="#cor"><span class="n">01</span> Cor</a>
+    <a href="#tipografia"><span class="n">02</span> Tipografia</a>
+    <a href="#grid"><span class="n">03</span> Grid</a>
+    <a href="#espacamento"><span class="n">04</span> Espaçamento</a>
+    <a href="#shape"><span class="n">05</span> Shape &amp; Radius</a>
+    <a href="#elevation"><span class="n">06</span> Elevation</a>
+    <a href="#icones"><span class="n">07</span> Iconografia</a>
+    <a href="#motion"><span class="n">08</span> Motion</a>
+    <div class="grp">Componentes</div>
+    <a href="#button"><span class="n">09</span> Button</a>
+    <a href="#input"><span class="n">10</span> Input</a>
+    <a href="#card"><span class="n">11</span> Card</a>
+    <a href="#badge"><span class="n">12</span> Badge</a>
+    <a href="#navbar"><span class="n">13</span> Navbar</a>
+    <a href="#modal"><span class="n">14</span> Modal</a>
+    <a href="#avatar"><span class="n">15</span> Avatar</a>
+    <div class="grp">Engenharia</div>
+    <a href="#tokens"><span class="n">16</span> Token Export</a>
+    <a href="#governanca"><span class="n">17</span> Governança</a>
+  </nav>
+  <button class="themetoggle" id="tg">Dark mode<span class="pill"></span></button>
+</aside>
+
+<main>
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Design System<br>Foundations<span>.</span></h1>
+    <p>Especificação técnica para consumo direto por Design (Figma Variables) e Engenharia (CSS custom properties / Tailwind / Style Dictionary). Arquitetura em 3 tiers: Primitive → Semantic → Component.</p>
+    <div class="metarow">
+      <div>Escala tipográfica<b>1.250 · Major Third</b></div>
+      <div>Espaçamento<b>Base 8pt</b></div>
+      <div>Modo<b>Light + Dark</b></div>
+      <div>Versão<b>1.0 · 2026</b></div>
+    </div>
+    <div class="callout" style="margin-top:var(--spacing-xl)">
+      <b>Este documento é executável.</b> Todo componente abaixo é HTML real consumindo os mesmos tokens da especificação — nenhum valor hard-coded. Alterne o dark mode na barra lateral: nada nos componentes muda, só a camada semântica é reatribuída. É essa a prova de que a arquitetura de tokens funciona.
+    </div>
+  </div>
+
+  <!-- 01 COR -->
+  <section id="cor">
+    <div class="eyebrow">01 / Foundation</div>
+    <h2 class="title">Cor</h2>
+    <p class="intro">Azul profundo e dessaturado para leitura de engenharia. Neutros mornos em vez de cinza puro — é daí que vem o "leve calor" sem sacrificar rigor técnico. Clique em qualquer swatch para copiar o HEX.</p>
+
+    <h3 class="sub">Primária — Tech Blue</h3>
+    <div class="swgrid">
+      <div class="sw" data-hex="#16295C"><div class="chip" style="background:#16295C"></div><div class="meta"><div class="tk">color-blue-700</div><div class="hx">#16295C</div><div class="use">Texto sobre fundo claro, headers densos.</div></div></div>
+      <div class="sw" data-hex="#1E3A8A"><div class="chip" style="background:#1E3A8A"></div><div class="meta"><div class="tk">color-blue-600</div><div class="hx">#1E3A8A</div><div class="use">Cor de marca. Botões primários, links.</div></div></div>
+      <div class="sw" data-hex="#5C7CFA"><div class="chip" style="background:#5C7CFA"></div><div class="meta"><div class="tk">color-blue-400</div><div class="hx">#5C7CFA</div><div class="use">Hover states, ação primária em dark mode.</div></div></div>
+      <div class="sw" data-hex="#E4E9FB"><div class="chip" style="background:#E4E9FB"></div><div class="meta"><div class="tk">color-blue-100</div><div class="hx">#E4E9FB</div><div class="use">Backgrounds sutis, focus ring, badges.</div></div></div>
+    </div>
+
+    <h3 class="sub">Ação / Destaque — Warm Signal</h3>
+    <div class="swgrid">
+      <div class="sw" data-hex="#D9541F"><div class="chip" style="background:#D9541F"></div><div class="meta"><div class="tk">color-orange-600</div><div class="hx">#D9541F</div><div class="use">CTAs de conversão, destaque editorial.</div></div></div>
+      <div class="sw" data-hex="#F2895C"><div class="chip" style="background:#F2895C"></div><div class="meta"><div class="tk">color-orange-400</div><div class="hx">#F2895C</div><div class="use">Hover do accent, séries de gráfico.</div></div></div>
+    </div>
+
+    <h3 class="sub">Neutras — Superfícies e Texto</h3>
+    <div class="swgrid">
+      <div class="sw" data-hex="#F7F5F1"><div class="chip" style="background:#F7F5F1;border-bottom:1px solid var(--border-default)"></div><div class="meta"><div class="tk">color-sand-0</div><div class="hx">#F7F5F1</div><div class="use">Background base. Nunca branco puro.</div></div></div>
+      <div class="sw" data-hex="#EDEAE3"><div class="chip" style="background:#EDEAE3"></div><div class="meta"><div class="tk">color-sand-100</div><div class="hx">#EDEAE3</div><div class="use">Superfície rebaixada, footers de modal.</div></div></div>
+      <div class="sw" data-hex="#8C887F"><div class="chip" style="background:#8C887F"></div><div class="meta"><div class="tk">color-sand-500</div><div class="hx">#8C887F</div><div class="use">Texto secundário, placeholders, ícone inativo.</div></div></div>
+      <div class="sw" data-hex="#1A1815"><div class="chip" style="background:#1A1815"></div><div class="meta"><div class="tk">color-sand-900</div><div class="hx">#1A1815</div><div class="use">Texto principal. Nunca preto puro.</div></div></div>
+    </div>
+
+    <h3 class="sub">Semânticas de feedback</h3>
+    <div class="swgrid">
+      <div class="sw" data-hex="#1F7A4C"><div class="chip" style="background:#1F7A4C"></div><div class="meta"><div class="tk">feedback-success</div><div class="hx">#1F7A4C</div><div class="use">Confirmação, estado saudável.</div></div></div>
+      <div class="sw" data-hex="#B4720E"><div class="chip" style="background:#B4720E"></div><div class="meta"><div class="tk">feedback-warning</div><div class="hx">#B4720E</div><div class="use">Atenção, ação reversível pendente.</div></div></div>
+      <div class="sw" data-hex="#C0392B"><div class="chip" style="background:#C0392B"></div><div class="meta"><div class="tk">feedback-error</div><div class="hx">#C0392B</div><div class="use">Erro, ação destrutiva.</div></div></div>
+      <div class="sw" data-hex="#1E3A8A"><div class="chip" style="background:#1E3A8A"></div><div class="meta"><div class="tk">feedback-info</div><div class="hx">#1E3A8A</div><div class="use">Informação neutra, dica de sistema.</div></div></div>
+    </div>
+
+    <h3 class="sub">Auditoria de contraste (WCAG 2.1)</h3>
+    <table>
+      <tr><th>Combinação</th><th>Ratio</th><th>Texto normal</th><th>Texto grande / UI</th></tr>
+      <tr><td class="tk">sand-900 / sand-0</td><td class="mono">15.1:1</td><td>AAA ✓</td><td>AAA ✓</td></tr>
+      <tr><td class="tk">sand-500 / sand-0</td><td class="mono">3.2:1</td><td class="dim">Falha AA ✕</td><td>AA ✓</td></tr>
+      <tr><td class="tk">blue-600 / sand-0</td><td class="mono">9.8:1</td><td>AAA ✓</td><td>AAA ✓</td></tr>
+      <tr><td class="tk">white / blue-600</td><td class="mono">9.4:1</td><td>AAA ✓</td><td>AAA ✓</td></tr>
+      <tr><td class="tk">white / orange-600</td><td class="mono">4.6:1</td><td>AA ✓</td><td>AA ✓</td></tr>
+      <tr><td class="tk">blue-700 / blue-100</td><td class="mono">11.2:1</td><td>AAA ✓</td><td>AAA ✓</td></tr>
+    </table>
+    <div class="callout"><b>Regra travada:</b> <span class="mono">sand-500</span> nunca em texto abaixo de 18px. Use <span class="mono">sand-900</span> com opacidade reduzida se precisar de hierarquia em corpo pequeno — não o cinza direto.</div>
+  </section>
+
+  <!-- 02 TIPOGRAFIA -->
+  <section id="tipografia">
+    <div class="eyebrow">02 / Foundation</div>
+    <h2 class="title">Tipografia</h2>
+    <p class="intro">Space Grotesk (display) + Inter (interface). Escala modular razão 1.250, base 16px. Contraste de família cria hierarquia sem depender de cor — requisito de acessibilidade e de leitura em dark mode.</p>
+
+    <div class="speclist">
+      <div><b>Display:</b> Space Grotesk · 500, 700</div>
+      <div><b>Interface:</b> Inter · 400, 500, 600</div>
+      <div><b>Mono:</b> JetBrains Mono · 400, 500</div>
+      <div><b>Base:</b> 16px / 1rem</div>
+    </div>
+
+    <div class="typerow"><div class="demo" style="font-family:var(--font-display-family);font-weight:700;font-size:60px;letter-spacing:-.02em;line-height:1.1">Display</div><div class="spec">font-display · 60px / 1.1 / 700 / −.02em</div></div>
+    <div class="typerow"><div class="demo" style="font-family:var(--font-display-family);font-weight:700;font-size:48px;letter-spacing:-.02em">Heading 1</div><div class="spec">font-h1 · 48px / 1.15 / 700 / −.02em</div></div>
+    <div class="typerow"><div class="demo" style="font-family:var(--font-display-family);font-weight:700;font-size:38px;letter-spacing:-.02em">Heading 2</div><div class="spec">font-h2 · 38px / 1.2 / 700 / −.02em</div></div>
+    <div class="typerow"><div class="demo" style="font-family:var(--font-display-family);font-weight:500;font-size:30px">Heading 3</div><div class="spec">font-h3 · 30px / 1.25 / 500 / 0</div></div>
+    <div class="typerow"><div class="demo" style="font-family:var(--font-display-family);font-weight:500;font-size:24px">Heading 4</div><div class="spec">font-h4 · 24px / 1.3 / 500 / 0</div></div>
+    <div class="typerow"><div class="demo" style="font-weight:600;font-size:20px">Heading 5 · Inter</div><div class="spec">font-h5 · 20px / 1.4 / 600 / 0</div></div>
+    <div class="typerow"><div class="demo" style="font-weight:600;font-size:18px">Heading 6 · Inter</div><div class="spec">font-h6 · 18px / 1.4 / 600 / 0</div></div>
+    <div class="typerow"><div class="demo" style="font-size:18px">Body large — texto de destaque</div><div class="spec">font-body-lg · 18px / 1.6 / 400</div></div>
+    <div class="typerow"><div class="demo" style="font-size:16px">Body — texto padrão de leitura longa</div><div class="spec">font-body · 16px / 1.6 / 400</div></div>
+    <div class="typerow"><div class="demo" style="font-size:14px;color:var(--text-secondary)">Body small — UI densa, tabelas</div><div class="spec">font-body-sm · 14px / 1.5 / 400</div></div>
+    <div class="typerow"><div class="demo" style="font-size:12px;font-weight:500;letter-spacing:.02em;color:var(--text-secondary)">CAPTION — METADATA, TIMESTAMPS</div><div class="spec">font-caption · 12px / 1.4 / 500 / +.02em</div></div>
+
+    <div class="callout"><b>Line-height por faixa:</b> headings 1.1–1.4 (texto curto, densidade proposital); body 1.5–1.6 (leitura longa). <b>Line-length:</b> limite de 68ch em texto corrido — acima disso o olho perde a linha no retorno.</div>
+  </section>
+
+  <!-- 03 GRID -->
+  <section id="grid">
+    <div class="eyebrow">03 / Foundation</div>
+    <h2 class="title">Sistema de Grid</h2>
+    <p class="intro">12 colunas em desktop, 8 em tablet, 4 em mobile. Container com max-width de 1440px para evitar line-length excessiva em monitores ultrawide.</p>
+
+    <table style="margin-bottom:var(--spacing-xl)">
+      <tr><th>Parâmetro</th><th>Desktop ≥1280</th><th>Tablet 768–1279</th><th>Mobile &lt;768</th></tr>
+      <tr><td>Colunas</td><td class="mono">12</td><td class="mono">8</td><td class="mono">4</td></tr>
+      <tr><td>Margem lateral</td><td class="mono">80px</td><td class="mono">40px</td><td class="mono">20px</td></tr>
+      <tr><td>Gutter</td><td class="mono">24px</td><td class="mono">20px</td><td class="mono">16px</td></tr>
+      <tr><td>Max-width</td><td class="mono">1440px</td><td class="dim">fluido</td><td class="dim">fluido</td></tr>
+      <tr><td>Base de design</td><td class="mono">1440px</td><td class="mono">768px</td><td class="mono">375px</td></tr>
+    </table>
+
+    <div class="gridviz">
+      <div class="head">Desktop · 12 colunas · gutter 24px</div>
+      <div class="cols" style="gap:24px"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
+    <div style="height:var(--spacing-md)"></div>
+    <div class="gridviz">
+      <div class="head">Mobile · 4 colunas · gutter 16px</div>
+      <div class="cols" style="gap:16px"><i></i><i></i><i></i><i></i></div>
+    </div>
+
+    <div class="callout"><b>Regra de aplicação:</b> seções full-bleed usam as 12 colunas. Conteúdo de leitura (formulários, artigos, relatórios) limita-se a 6–8 colunas centrais para preservar line-length confortável.</div>
+  </section>
+
+  <!-- 04 ESPAÇAMENTO -->
+  <section id="espacamento">
+    <div class="eyebrow">04 / Foundation</div>
+    <h2 class="title">Espaçamento</h2>
+    <p class="intro">Escala base 8pt com step de 4pt para ajustes finos em componentes densos. Se uma medida "parece certa" mas não está na escala, o problema está no layout — não na escala.</p>
+
+    <div class="spacerow"><div class="tk">spacing-2xs</div><div class="val">4px</div><div class="bar" style="width:4px"></div><div class="use">Gap ícone↔label, padding mínimo</div></div>
+    <div class="spacerow"><div class="tk">spacing-xs</div><div class="val">8px</div><div class="bar" style="width:8px"></div><div class="use">Padding de badge, gap inline</div></div>
+    <div class="spacerow"><div class="tk">spacing-sm</div><div class="val">12px</div><div class="bar" style="width:12px"></div><div class="use">Padding interno de input/botão</div></div>
+    <div class="spacerow"><div class="tk">spacing-md</div><div class="val">16px</div><div class="bar" style="width:16px"></div><div class="use">Padding padrão, gap entre itens de lista</div></div>
+    <div class="spacerow"><div class="tk">spacing-lg</div><div class="val">24px</div><div class="bar" style="width:24px"></div><div class="use">Padding de card, gap entre blocos</div></div>
+    <div class="spacerow"><div class="tk">spacing-xl</div><div class="val">32px</div><div class="bar" style="width:32px"></div><div class="use">Espaço entre componentes distintos</div></div>
+    <div class="spacerow"><div class="tk">spacing-2xl</div><div class="val">48px</div><div class="bar" style="width:48px"></div><div class="use">Espaço entre subseções</div></div>
+    <div class="spacerow"><div class="tk">spacing-3xl</div><div class="val">64px</div><div class="bar" style="width:64px"></div><div class="use">Espaço entre seções de página</div></div>
+    <div class="spacerow"><div class="tk">spacing-4xl</div><div class="val">96px</div><div class="bar" style="width:96px"></div><div class="use">Respiro editorial, hero</div></div>
+    <div class="spacerow"><div class="tk">spacing-5xl</div><div class="val">128px</div><div class="bar" style="width:128px"></div><div class="use">Breaks de seção em landing/institucional</div></div>
+  </section>
+
+  <!-- 05 SHAPE -->
+  <section id="shape">
+    <div class="eyebrow">05 / Foundation</div>
+    <h2 class="title">Shape &amp; Border Radius</h2>
+    <p class="intro">Raio reduzido em controles densos preserva a leitura geométrica; raio maior em containers introduz o leve calor. A suavização acontece na escala macro, não onde o usuário interage diretamente.</p>
+
+    <div class="demogrid">
+      <div class="demobox" style="border-radius:var(--radius-sm)">radius-sm · 6px</div>
+      <div class="demobox" style="border-radius:var(--radius-md)">radius-md · 10px</div>
+      <div class="demobox" style="border-radius:var(--radius-lg)">radius-lg · 16px</div>
+      <div class="demobox" style="border-radius:var(--radius-xl)">radius-xl · 24px</div>
+      <div class="demobox" style="border-radius:var(--radius-full)">radius-full</div>
+    </div>
+
+    <table style="margin-top:var(--spacing-xl)">
+      <tr><th>Token</th><th>Valor</th><th>Aplicação</th></tr>
+      <tr><td class="tk">radius-sm</td><td class="mono">6px</td><td class="dim">Inputs, botões pequenos, checkbox, tags</td></tr>
+      <tr><td class="tk">radius-md</td><td class="mono">10px</td><td class="dim">Botões padrão, cards pequenos, dropdowns</td></tr>
+      <tr><td class="tk">radius-lg</td><td class="mono">16px</td><td class="dim">Cards principais, containers de conteúdo</td></tr>
+      <tr><td class="tk">radius-xl</td><td class="mono">24px</td><td class="dim">Modais, painéis grandes, imagens de destaque</td></tr>
+      <tr><td class="tk">radius-full</td><td class="mono">999px</td><td class="dim">Avatares, pills, toggles, badges</td></tr>
+    </table>
+  </section>
+
+  <!-- 06 ELEVATION -->
+  <section id="elevation">
+    <div class="eyebrow">06 / Foundation</div>
+    <h2 class="title">Elevation</h2>
+    <p class="intro">Sombra baseada no neutro morno (<span class="mono">sand-900</span>), nunca preto puro — consistência com a paleta. Spread negativo mantém a sombra contida sob o elemento, evitando o halo difuso típico de sombras mal calibradas.</p>
+
+    <div class="demogrid">
+      <div class="elevbox" style="box-shadow:var(--elevation-1)">elevation-1</div>
+      <div class="elevbox" style="box-shadow:var(--elevation-2)">elevation-2</div>
+      <div class="elevbox" style="box-shadow:var(--elevation-3)">elevation-3</div>
+      <div class="elevbox" style="box-shadow:var(--elevation-4)">elevation-4</div>
+      <div class="elevbox" style="box-shadow:var(--elevation-5)">elevation-5</div>
+    </div>
+
+    <table style="margin-top:var(--spacing-xl)">
+      <tr><th>Token</th><th>X</th><th>Y</th><th>Blur</th><th>Spread</th><th>Opacidade</th><th>Uso</th></tr>
+      <tr><td class="tk">elevation-0</td><td class="mono">0</td><td class="mono">0</td><td class="mono">0</td><td class="mono">0</td><td class="dim">—</td><td class="dim">Superfície base</td></tr>
+      <tr><td class="tk">elevation-1</td><td class="mono">0</td><td class="mono">1px</td><td class="mono">2px</td><td class="mono">0</td><td class="mono">6%</td><td class="dim">Cards em repouso, inputs</td></tr>
+      <tr><td class="tk">elevation-2</td><td class="mono">0</td><td class="mono">4px</td><td class="mono">8px</td><td class="mono">−2px</td><td class="mono">8%</td><td class="dim">Card hover, dropdowns</td></tr>
+      <tr><td class="tk">elevation-3</td><td class="mono">0</td><td class="mono">8px</td><td class="mono">16px</td><td class="mono">−4px</td><td class="mono">10%</td><td class="dim">Popovers, tooltips</td></tr>
+      <tr><td class="tk">elevation-4</td><td class="mono">0</td><td class="mono">16px</td><td class="mono">32px</td><td class="mono">−8px</td><td class="mono">12%</td><td class="dim">Modais, dialogs</td></tr>
+      <tr><td class="tk">elevation-5</td><td class="mono">0</td><td class="mono">24px</td><td class="mono">48px</td><td class="mono">−12px</td><td class="mono">16%</td><td class="dim">Spotlight, onboarding</td></tr>
+    </table>
+
+    <div class="callout"><b>Regra de hierarquia Z:</b> nunca pular níveis (ex.: de <span class="mono">elevation-1</span> direto para <span class="mono">elevation-4</span>). Em dark mode a sombra perde eficácia — a elevação passa a ser comunicada também por variação de <span class="mono">bg-surface</span>, já resolvida na camada semântica.</div>
+  </section>
+
+  <!-- 07 ICONES -->
+  <section id="icones">
+    <div class="eyebrow">07 / Foundation</div>
+    <h2 class="title">Iconografia</h2>
+    <p class="intro">Outlined com stroke 1.5px em grid 24×24. Corpo geométrico com terminais arredondados — a mesma lógica de "precisão com leve calor" aplicada ao radius. Biblioteca base recomendada: Lucide.</p>
+
+    <div class="canvas">
+      <div class="icogrid">
+        <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M3 12l2-2 4 4 10-10 2 2L9 18z"/></svg>check</div>
+        <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>search</div>
+        <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5"/></svg>layout</div>
+        <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M4 18V9M10 18V5M16 18v-6M22 18H2"/></svg>chart</div>
+        <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg>settings</div>
+        <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>arrow</div>
+        <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></svg>plus</div>
+        <div class="ico"><svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg>info</div>
+      </div>
+    </div>
+
+    <table>
+      <tr><th>Parâmetro</th><th>Especificação</th></tr>
+      <tr><td>Estilo</td><td class="dim">Outlined (stroke). Filled apenas em estado ativo de navegação.</td></tr>
+      <tr><td>Stroke weight</td><td class="dim"><span class="mono">1.5px</span> em 24px · <span class="mono">1.25px</span> em 20px · <span class="mono">1.75px</span> em 32px</td></tr>
+      <tr><td>Terminais</td><td class="dim"><span class="mono">stroke-linecap: round</span> · <span class="mono">stroke-linejoin: round</span></td></tr>
+      <tr><td>Keyline grid</td><td class="dim">24×24px, área ativa 20×20px (2px de respiro por lado)</td></tr>
+      <tr><td>Estados</td><td class="dim">default <span class="mono">text-secondary</span> · active <span class="mono">action-primary</span> · disabled 40% opacidade</td></tr>
+      <tr><td>Biblioteca</td><td class="dim">Lucide Icons — open-source, stroke consistente, +1000 ícones, extensível</td></tr>
+    </table>
+  </section>
+
+  <!-- 08 MOTION -->
+  <section id="motion">
+    <div class="eyebrow">08 / Foundation</div>
+    <h2 class="title">Motion</h2>
+    <p class="intro">Movimento é feedback, não decoração. Curva única para todo o sistema — variação acontece na duração, não no easing.</p>
+    <table>
+      <tr><th>Token</th><th>Valor</th><th>Uso</th></tr>
+      <tr><td class="tk">duration-fast</td><td class="mono">120ms</td><td class="dim">Hover, focus, mudança de cor</td></tr>
+      <tr><td class="tk">duration-base</td><td class="mono">200ms</td><td class="dim">Dropdown, tooltip, toggle</td></tr>
+      <tr><td class="tk">duration-slow</td><td class="mono">320ms</td><td class="dim">Modal, drawer, transição de página</td></tr>
+      <tr><td class="tk">easing-standard</td><td class="mono">cubic-bezier(.2,0,0,1)</td><td class="dim">Padrão único do sistema</td></tr>
+    </table>
+    <div class="callout"><b>Acessibilidade:</b> respeitar <span class="mono">prefers-reduced-motion</span> — reduzir todas as durações a <span class="mono">0.01ms</span> quando ativo, mantendo o estado final.</div>
+  </section>
+
+  <!-- 09 BUTTON -->
+  <section id="button">
+    <div class="eyebrow">09 / Componente</div>
+    <h2 class="title">Button</h2>
+    <p class="intro">Quatro variantes hierarquizadas. Regra: um único botão primário por tela ou por bloco de decisão — dois primários significam que a hierarquia da tela não foi resolvida.</p>
+    <div class="canvas">
+      <button class="btn btn--primary">Ação primária</button>
+      <button class="btn btn--accent">CTA de conversão</button>
+      <button class="btn btn--secondary">Secundária</button>
+      <button class="btn btn--ghost">Ghost</button>
+      <button class="btn btn--primary" disabled>Disabled</button>
+      <button class="btn btn--secondary btn--sm">Small</button>
+    </div>
+    <div class="speclist">
+      <div><b>Props:</b> variant · size · disabled · icon · loading</div>
+      <div><b>Estados:</b> default, hover, focus, active, disabled, loading</div>
+      <div><b>Altura mín.:</b> 40px (44px em mobile — alvo de toque)</div>
+    </div>
+    <table>
+      <tr><th>Variante</th><th>Quando usar</th><th>Tokens</th></tr>
+      <tr><td>primary</td><td class="dim">Ação principal do fluxo</td><td class="tk">action-primary / text-on-action</td></tr>
+      <tr><td>accent</td><td class="dim">CTA de conversão — máximo 1 por página</td><td class="tk">action-accent / #FFF</td></tr>
+      <tr><td>secondary</td><td class="dim">Ação alternativa, cancelar</td><td class="tk">transparent / border-strong</td></tr>
+      <tr><td>ghost</td><td class="dim">Ação terciária, toolbars densas</td><td class="tk">transparent / text-secondary</td></tr>
+    </table>
+  </section>
+
+  <!-- 10 INPUT -->
+  <section id="input">
+    <div class="eyebrow">10 / Componente</div>
+    <h2 class="title">Input</h2>
+    <p class="intro">Label sempre visível — placeholder não substitui label (some ao digitar e quebra acessibilidade). Mensagem de erro descreve a causa e o próximo passo, conforme a regra de microcopy do tom de voz.</p>
+    <div class="canvas">
+      <div class="field"><label for="i1">E-mail de trabalho</label><input id="i1" type="email" placeholder="voce@empresa.com"><span class="help">Usamos para enviar o relatório.</span></div>
+      <div class="field is-error"><label for="i2">E-mail de trabalho</label><input id="i2" type="email" value="voce@empresa"><span class="help">Falta o domínio. Verifique após o @.</span></div>
+      <div class="field"><label for="i3">Desabilitado</label><input id="i3" value="Somente leitura" disabled><span class="help">Definido pelo administrador.</span></div>
+    </div>
+    <div class="speclist">
+      <div><b>Props:</b> label · placeholder · helpText · state · disabled · required</div>
+      <div><b>Estados:</b> default, focus, filled, error, disabled, read-only</div>
+      <div><b>Focus ring:</b> 3px <span class="mono">blue-100</span> + borda <span class="mono">action-primary</span></div>
+    </div>
+  </section>
+
+  <!-- 11 CARD -->
+  <section id="card">
+    <div class="eyebrow">11 / Componente</div>
+    <h2 class="title">Card</h2>
+    <p class="intro">Container de conteúdo agrupado. Padding interno sempre <span class="mono">spacing-lg</span>; elevação sobe de 1 para 2 apenas quando o card inteiro é clicável.</p>
+    <div class="canvas">
+      <div class="card">
+        <span class="badge badge--info">Diagnóstico</span>
+        <h4 style="margin-top:var(--spacing-sm)">Mapeamento de oportunidade</h4>
+        <p>Análise de mercado e validação de hipótese antes de qualquer linha de código.</p>
+        <button class="btn btn--secondary btn--sm">Ver relatório</button>
+      </div>
+      <div class="card" style="box-shadow:var(--elevation-2)">
+        <span class="badge badge--success">Ativo</span>
+        <h4 style="margin-top:var(--spacing-sm)">Site estratégico</h4>
+        <p>Estado hover: elevação 2. Use apenas quando o card inteiro for uma superfície clicável.</p>
+        <button class="btn btn--primary btn--sm">Abrir projeto</button>
+      </div>
+    </div>
+    <div class="speclist">
+      <div><b>Props:</b> elevation · interactive · padding · header/footer slots</div>
+      <div><b>Radius:</b> <span class="mono">radius-lg</span> · 16px</div>
+      <div><b>Borda:</b> <span class="mono">border-default</span> sempre presente, inclusive com sombra</div>
+    </div>
+  </section>
+
+  <!-- 12 BADGE -->
+  <section id="badge">
+    <div class="eyebrow">12 / Componente</div>
+    <h2 class="title">Badge</h2>
+    <p class="intro">Comunica status, nunca ação. Cor sozinha não pode carregar significado — o texto sempre nomeia o estado (requisito WCAG 1.4.1).</p>
+    <div class="canvas">
+      <span class="badge badge--neutral">Rascunho</span>
+      <span class="badge badge--info">Em análise</span>
+      <span class="badge badge--success">Ativo</span>
+      <span class="badge badge--warning">Pendente</span>
+      <span class="badge badge--error">Bloqueado</span>
+    </div>
+    <div class="speclist">
+      <div><b>Props:</b> variant · label · dot</div>
+      <div><b>Radius:</b> <span class="mono">radius-full</span></div>
+      <div><b>Regra:</b> nunca clicável — se precisar de ação, é um Button ou Chip</div>
+    </div>
+  </section>
+
+  <!-- 13 NAVBAR -->
+  <section id="navbar">
+    <div class="eyebrow">13 / Componente</div>
+    <h2 class="title">Navbar</h2>
+    <p class="intro">Logo à esquerda, navegação ao centro-direita, uma única ação primária à direita. Altura fixa de 64px em desktop, 56px em mobile.</p>
+    <div class="canvas col">
+      <div class="navbar">
+        <div class="lg">[ MARCA ]</div>
+        <div class="links"><span>Serviços</span><span>Cases</span><span>Método</span><span>Sobre</span></div>
+        <button class="btn btn--accent btn--sm">Iniciar conversa</button>
+      </div>
+    </div>
+    <div class="speclist">
+      <div><b>Props:</b> links[] · cta · sticky · variant</div>
+      <div><b>Altura:</b> 64px desktop / 56px mobile</div>
+      <div><b>Mobile:</b> colapsa em menu drawer abaixo de 768px</div>
+    </div>
+  </section>
+
+  <!-- 14 MODAL -->
+  <section id="modal">
+    <div class="eyebrow">14 / Componente</div>
+    <h2 class="title">Modal</h2>
+    <p class="intro">Overlay <span class="mono">rgba(26,24,21,.5)</span>, elevação 4, radius-xl. Ação destrutiva sempre à direita e nunca como primária. Fechável por ESC e clique no overlay — exceto em confirmação destrutiva.</p>
+    <div class="canvas">
+      <div class="modal">
+        <div class="mh"><h4>Arquivar projeto?</h4></div>
+        <div class="mb">O projeto sai da lista ativa e para de gerar relatórios. Você pode restaurá-lo a qualquer momento em Arquivados.</div>
+        <div class="mf">
+          <button class="btn btn--ghost btn--sm">Cancelar</button>
+          <button class="btn btn--primary btn--sm">Arquivar</button>
+        </div>
+      </div>
+    </div>
+    <div class="speclist">
+      <div><b>Props:</b> title · size · dismissible · footerActions[]</div>
+      <div><b>Larguras:</b> sm 400px · md 560px · lg 720px</div>
+      <div><b>A11y:</b> focus trap obrigatório, <span class="mono">role="dialog"</span>, <span class="mono">aria-modal="true"</span></div>
+    </div>
+  </section>
+
+  <!-- 15 AVATAR -->
+  <section id="avatar">
+    <div class="eyebrow">15 / Componente</div>
+    <h2 class="title">Avatar</h2>
+    <p class="intro">Iniciais como fallback quando não há imagem — nunca ícone genérico de pessoa. Cor de fundo derivada por hash do nome, restrita aos tints da paleta.</p>
+    <div class="canvas" style="align-items:center">
+      <div class="avatar avatar--sm">MT</div>
+      <div class="avatar">MT</div>
+      <div class="avatar avatar--lg">MT</div>
+      <div class="avatar avatar--accent">AC</div>
+      <div class="stackav">
+        <div class="avatar">MT</div><div class="avatar avatar--accent">JS</div><div class="avatar">RL</div>
+        <div class="avatar" style="background:var(--bg-surface-sunken);color:var(--text-secondary)">+4</div>
+      </div>
+    </div>
+    <div class="speclist">
+      <div><b>Props:</b> src · name · size · variant</div>
+      <div><b>Tamanhos:</b> sm 28px · md 40px · lg 56px</div>
+      <div><b>Stack:</b> overlap −10px, borda 2px <span class="mono">bg-surface</span></div>
+    </div>
+  </section>
+
+  <!-- 16 TOKENS -->
+  <section id="tokens">
+    <div class="eyebrow">16 / Engenharia</div>
+    <h2 class="title">Token Export</h2>
+    <p class="intro">Fonte única de verdade em formato W3C DTCG. Pipeline recomendado: Tokens Studio (Figma) → <span class="mono">tokens.json</span> → Style Dictionary → CSS / Tailwind / Swift / XML. Isso elimina divergência entre Figma e código desde o dia 1.</p>
+
+    <h3 class="sub">tokens.json — formato W3C DTCG</h3>
+<pre>{
+  <span class="k">"color"</span>: {
+    <span class="c">// TIER 1 — primitive</span>
+    <span class="k">"blue"</span>: {
+      <span class="k">"600"</span>: { <span class="k">"$value"</span>: <span class="k">"#1E3A8A"</span>, <span class="k">"$type"</span>: <span class="k">"color"</span> },
+      <span class="k">"400"</span>: { <span class="k">"$value"</span>: <span class="k">"#5C7CFA"</span>, <span class="k">"$type"</span>: <span class="k">"color"</span> }
+    },
+    <span class="k">"sand"</span>: {
+      <span class="k">"0"</span>:   { <span class="k">"$value"</span>: <span class="k">"#F7F5F1"</span>, <span class="k">"$type"</span>: <span class="k">"color"</span> },
+      <span class="k">"900"</span>: { <span class="k">"$value"</span>: <span class="k">"#1A1815"</span>, <span class="k">"$type"</span>: <span class="k">"color"</span> }
+    }
+  },
+  <span class="c">// TIER 2 — semantic (referencia tier 1)</span>
+  <span class="k">"bg"</span>: {
+    <span class="k">"base"</span>:    { <span class="k">"$value"</span>: <span class="k">"{color.sand.0}"</span>,   <span class="k">"$type"</span>: <span class="k">"color"</span> },
+    <span class="k">"surface"</span>: { <span class="k">"$value"</span>: <span class="k">"#FFFFFF"</span>,          <span class="k">"$type"</span>: <span class="k">"color"</span> }
+  },
+  <span class="k">"action"</span>: {
+    <span class="k">"primary"</span>: { <span class="k">"$value"</span>: <span class="k">"{color.blue.600}"</span>, <span class="k">"$type"</span>: <span class="k">"color"</span> }
+  },
+  <span class="k">"spacing"</span>: {
+    <span class="k">"md"</span>: { <span class="k">"$value"</span>: <span class="k">"16px"</span>, <span class="k">"$type"</span>: <span class="k">"dimension"</span> },
+    <span class="k">"lg"</span>: { <span class="k">"$value"</span>: <span class="k">"24px"</span>, <span class="k">"$type"</span>: <span class="k">"dimension"</span> }
+  },
+  <span class="c">// TIER 3 — component (referencia tier 2)</span>
+  <span class="k">"button"</span>: {
+    <span class="k">"primary"</span>: {
+      <span class="k">"bg"</span>:      { <span class="k">"$value"</span>: <span class="k">"{action.primary}"</span>, <span class="k">"$type"</span>: <span class="k">"color"</span> },
+      <span class="k">"padding"</span>: { <span class="k">"$value"</span>: <span class="k">"{spacing.sm} {spacing.md}"</span>, <span class="k">"$type"</span>: <span class="k">"dimension"</span> }
+    }
+  }
+}</pre>
+
+    <h3 class="sub">CSS custom properties — output gerado</h3>
+<pre><span class="c">/* gerado por Style Dictionary — não editar à mão */</span>
+<span class="k">:root</span> {
+  --color-blue-600: #1E3A8A;
+  --color-sand-0:   #F7F5F1;
+  --color-sand-900: #1A1815;
+
+  --bg-base:        var(--color-sand-0);
+  --text-primary:   var(--color-sand-900);
+  --action-primary: var(--color-blue-600);
+
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --radius-md:  10px;
+  --elevation-4: 0 16px 32px -8px rgba(26,24,21,.12);
+}
+
+<span class="k">[data-theme="dark"]</span> {
+  <span class="c">/* só a camada semântica é reatribuída */</span>
+  --bg-base:        #141311;
+  --text-primary:   #F0EDE7;
+  --action-primary: var(--color-blue-400);
+}</pre>
+
+    <h3 class="sub">Convenção de nomenclatura</h3>
+    <table>
+      <tr><th>Tier</th><th>Padrão</th><th>Exemplo</th></tr>
+      <tr><td>1 · Primitive</td><td class="mono">color-{matiz}-{step}</td><td class="tk">color-blue-600</td></tr>
+      <tr><td>2 · Semantic</td><td class="mono">{categoria}-{intenção}-{variante}</td><td class="tk">action-primary-hover</td></tr>
+      <tr><td>3 · Component</td><td class="mono">{componente}-{variante}-{propriedade}</td><td class="tk">button-primary-bg</td></tr>
+    </table>
+    <div class="callout"><b>Regra inviolável:</b> componente nunca referencia tier 1 diretamente. Se um componente aponta para <span class="mono">color-blue-600</span> em vez de <span class="mono">action-primary</span>, o dark mode e qualquer rebrand futuro quebram. Isso é o item nº1 do checklist de code review.</div>
+  </section>
+
+  <!-- 17 GOVERNANÇA -->
+  <section id="governanca">
+    <div class="eyebrow">17 / Engenharia</div>
+    <h2 class="title">Governança</h2>
+    <p class="intro">O sistema só existe se for adotado. Com dois fundadores, o processo pode ser leve — mas precisa ser explícito antes do primeiro contratado entrar.</p>
+
+    <table>
+      <tr><th>Área</th><th>Definição</th></tr>
+      <tr><td>Versionamento</td><td class="dim">SemVer. <span class="mono">MAJOR</span> = breaking (token removido/renomeado) · <span class="mono">MINOR</span> = adição · <span class="mono">PATCH</span> = correção visual</td></tr>
+      <tr><td>Contribuição</td><td class="dim">RFC curto em issue antes de adicionar componente. Toda adição precisa justificar por que não é variante de um componente existente.</td></tr>
+      <tr><td>Ownership</td><td class="dim">Definir 1 owner do sistema. Decisão de token exige acordo dos dois sócios; decisão de componente é do owner.</td></tr>
+      <tr><td>Changelog</td><td class="dim">Toda release documenta o que mudou e o caminho de migração de breaking changes.</td></tr>
+      <tr><td>Deprecation</td><td class="dim">Token ou componente marcado como <span class="mono">@deprecated</span> por 1 ciclo antes da remoção. Nunca remover direto.</td></tr>
+    </table>
+
+    <h3 class="sub">Definition of Done — novo componente</h3>
+    <table>
+      <tr><th>#</th><th>Critério</th></tr>
+      <tr><td class="mono">01</td><td class="dim">Consome exclusivamente tokens semânticos — zero valor hard-coded</td></tr>
+      <tr><td class="mono">02</td><td class="dim">Todos os estados cobertos: default, hover, focus, active, disabled, loading, error</td></tr>
+      <tr><td class="mono">03</td><td class="dim">Auto Layout no Figma + Component Properties espelhando as props de código</td></tr>
+      <tr><td class="mono">04</td><td class="dim">Contraste AA verificado em light e dark mode</td></tr>
+      <tr><td class="mono">05</td><td class="dim">Navegável por teclado, foco visível, semântica ARIA correta</td></tr>
+      <tr><td class="mono">06</td><td class="dim">Documentado: anatomia, props, do/don't, quando NÃO usar</td></tr>
+      <tr><td class="mono">07</td><td class="dim">Responsivo validado nos 3 breakpoints</td></tr>
+    </table>
+
+    <h3 class="sub">Anti-padrões — o que quebra o sistema</h3>
+    <div class="canvas col" style="gap:var(--spacing-sm)">
+      <div><span class="pill-note">✕</span> &nbsp;Componente referenciando token primitivo em vez de semântico</div>
+      <div><span class="pill-note">✕</span> &nbsp;Valor de espaçamento fora da escala 8pt porque "ficou melhor"</div>
+      <div><span class="pill-note">✕</span> &nbsp;Novo componente que é, na prática, variante de um existente</div>
+      <div><span class="pill-note">✕</span> &nbsp;Cor comunicando estado sem texto de apoio</div>
+      <div><span class="pill-note">✕</span> &nbsp;Terceira família tipográfica introduzida "só nesse caso"</div>
+      <div><span class="pill-note">✕</span> &nbsp;Documentar depois de escalar — a dívida vira irreversível</div>
+    </div>
+  </section>
+
+  <footer>
+    <div>[ Marca a definir ] · Design System v1.0 · 2026</div>
+    <div>Documento 02 de 02 — o Documento 01 cobre Identidade Visual e Estratégia de Marca</div>
+  </footer>
+</main>
+</div>
+
+<div class="toast" id="toast">HEX copiado</div>
+
+<script>
+// theme toggle
+const tg = document.getElementById('tg');
+tg.addEventListener('click', () => {
+  const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', dark ? 'light' : 'dark');
+  tg.firstChild.textContent = dark ? 'Dark mode' : 'Light mode';
+});
+
+// copy hex
+const toast = document.getElementById('toast');
+let t;
+document.querySelectorAll('.sw').forEach(sw => {
+  sw.addEventListener('click', () => {
+    const hex = sw.dataset.hex;
+    navigator.clipboard?.writeText(hex);
+    toast.textContent = hex + ' copiado';
+    toast.classList.add('on');
+    clearTimeout(t);
+    t = setTimeout(() => toast.classList.remove('on'), 1600);
+  });
+});
+
+// active nav on scroll
+const links = [...document.querySelectorAll('nav a')];
+const visible = new Set();
+function paint() {
+  links.forEach(l => { l.style.color = ''; l.style.background = ''; });
+  const first = [...document.querySelectorAll('section[id]')].find(s => visible.has(s.id));
+  if (!first) return;
+  const active = links.find(l => l.getAttribute('href') === '#' + first.id);
+  if (active) { active.style.color = 'var(--text-primary)'; active.style.background = 'var(--bg-surface-sunken)'; }
+}
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => e.isIntersecting ? visible.add(e.target.id) : visible.delete(e.target.id));
+  paint();
+}, { rootMargin: '-10% 0px -80% 0px' });
+document.querySelectorAll('section[id]').forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

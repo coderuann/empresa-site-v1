@@ -1,0 +1,276 @@
+/* ============================================================================
+   BLOCK — tokens.css
+   Tier 1 (primitive) + Tier 2 (semantic)
+
+   Fonte de verdade: design-system.html v1.0 (documento vivo na raiz do
+   projeto). Nenhum valor é decidido nesta camada — todos são extraídos da
+   especificação. Componente nunca referencia Tier 1 diretamente.
+   ============================================================================ */
+
+:root{
+
+  /* ==========================================================
+     TIER 1 · PRIMITIVE — COR
+     ========================================================== */
+
+  /* Primária — Tech Blue */
+  --color-blue-700:#16295C;
+  --color-blue-600:#1E3A8A;
+  --color-blue-400:#5C7CFA;
+  --color-blue-300:#9DB2FE;   /* texto sobre tint azul no dark — o 400 dá 3.7:1 */
+  --color-blue-100:#E4E9FB;
+
+  /* Ação / Destaque — Warm Signal.
+     600 é a cor de marca. 700 e 800 existem porque branco sobre o 600
+     mede 4.0:1 — abaixo de AA. Todo destaque que carrega texto usa o 700. */
+  --color-orange-800:#9E3A15;
+  --color-orange-700:#B8441A;
+  --color-orange-600:#D9541F;
+  --color-orange-400:#F2895C;
+
+  /* Neutras mornas — superfícies e texto (light) */
+  --color-sand-0:#F7F5F1;
+  --color-sand-100:#EDEAE3;
+  --color-sand-500:#8C887F;
+  --color-sand-900:#1A1815;
+
+  /* Neutras mornas — superfícies e texto (dark) */
+  --color-ink-900:#0E0D0C;
+  --color-ink-800:#141311;
+  --color-ink-700:#1E1C19;
+  --color-ink-400:#9C978D;
+  --color-ink-300:#B0AAA0;
+  --color-ink-100:#F0EDE7;
+
+  /* Absoluto — permitido apenas como texto sobre superfície de ação */
+  --color-white:#FFFFFF;
+
+  /* Feedback. Os 600 pintam ícone, borda e superfície; os 700 existem
+     porque em texto de 12px (badge) os 600 ficam entre 3.8:1 e 2.9:1. */
+  --color-green-600:#1F7A4C;
+  --color-green-700:#17603B;
+  --color-amber-600:#B4720E;
+  --color-amber-700:#7A4B06;
+  --color-red-600:#C0392B;
+  --color-red-700:#9B2B20;
+
+  /* ==========================================================
+     TIER 1 · PRIMITIVE — ESPAÇAMENTO (base 8pt, step 4pt)
+     ========================================================== */
+  --spacing-2xs:4px;
+  --spacing-xs:8px;
+  --spacing-sm:12px;
+  --spacing-md:16px;
+  --spacing-lg:24px;
+  --spacing-xl:32px;
+  --spacing-2xl:48px;
+  --spacing-3xl:64px;
+  --spacing-4xl:96px;
+  --spacing-5xl:128px;
+
+  /* ==========================================================
+     TIER 1 · PRIMITIVE — SHAPE
+     ========================================================== */
+  --radius-sm:6px;
+  --radius-md:10px;
+  --radius-lg:16px;
+  --radius-xl:24px;
+  --radius-full:999px;
+
+  /* ==========================================================
+     TIER 1 · PRIMITIVE — TIPOGRAFIA
+     Escala modular 1.250 (Major Third), base 16px.
+     Display até H4 em Space Grotesk; H5, H6 e corpo em Inter.
+     ========================================================== */
+  --font-display-family:"Space Grotesk",ui-sans-serif,system-ui,sans-serif;
+  --font-ui-family:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+
+  --font-display-size:60px;  --font-display-lh:1.1;   --font-display-weight:700;  --font-display-track:-.02em;
+  --font-h1-size:48px;       --font-h1-lh:1.15;       --font-h1-weight:700;       --font-h1-track:-.02em;
+  --font-h2-size:38px;       --font-h2-lh:1.2;        --font-h2-weight:700;       --font-h2-track:-.02em;
+  --font-h3-size:30px;       --font-h3-lh:1.25;       --font-h3-weight:500;       --font-h3-track:0;
+  --font-h4-size:24px;       --font-h4-lh:1.3;        --font-h4-weight:500;       --font-h4-track:0;
+  --font-h5-size:20px;       --font-h5-lh:1.4;        --font-h5-weight:600;       --font-h5-track:0;
+  --font-h6-size:18px;       --font-h6-lh:1.4;        --font-h6-weight:600;       --font-h6-track:0;
+  --font-body-lg-size:18px;  --font-body-lg-lh:1.6;   --font-body-lg-weight:400;
+  --font-body-size:16px;     --font-body-lh:1.6;      --font-body-weight:400;
+  --font-body-sm-size:14px;  --font-body-sm-lh:1.5;   --font-body-sm-weight:400;
+  --font-caption-size:12px;  --font-caption-lh:1.4;   --font-caption-weight:500;  --font-caption-track:.02em;
+
+  /* Wordmark — recomendação do documento de identidade §06 */
+  --font-wordmark-track:-.03em;
+
+  /* ==========================================================
+     TIER 1 · PRIMITIVE — MOTION
+     Curva única do sistema. A variação acontece na duração.
+     ========================================================== */
+  --duration-fast:120ms;
+  --duration-base:200ms;
+  --duration-slow:320ms;
+  --easing-standard:cubic-bezier(.2,0,0,1);
+
+  /* ==========================================================
+     TIER 2 · SEMANTIC — LIGHT MODE
+     ========================================================== */
+
+  /* Superfícies */
+  --bg-base:var(--color-sand-0);
+  --bg-surface:var(--color-white);
+  --bg-surface-sunken:var(--color-sand-100);
+  --bg-inverse:var(--color-sand-900);
+  --bg-overlay:rgba(26,24,21,.5);
+
+  /* Texto */
+  --text-primary:var(--color-sand-900);
+  --text-secondary:var(--color-sand-500);
+  /* Regra travada do DS §01: sand-500 tem 3.2:1 e falha AA abaixo de 18px.
+     Para hierarquia em corpo pequeno usa-se sand-900 com opacidade reduzida
+     (62% = 4.8:1 sobre bg-base) — nunca o cinza direto. */
+  --text-secondary-sm:rgba(26,24,21,.62);
+  --text-brand:var(--color-blue-600);
+  --text-accent:var(--color-orange-700);
+  --text-on-action:var(--color-white);
+  --text-on-accent:var(--color-white);
+  --text-inverse:var(--color-sand-0);
+
+  /* Bordas */
+  --border-default:rgba(26,24,21,.14);
+  --border-strong:rgba(26,24,21,.28);
+
+  /* Ação */
+  --action-primary:var(--color-blue-600);
+  --action-primary-hover:var(--color-blue-700);
+  --action-accent:var(--color-orange-600);        /* decoração: régua, ponto, marcador */
+  --action-accent-hover:var(--color-orange-700);
+  --action-accent-strong:var(--color-orange-700); /* superfície que carrega texto */
+  --action-accent-strong-hover:var(--color-orange-800);
+  --action-tint:var(--color-blue-100);
+  --action-accent-tint:rgba(217,84,31,.14);
+  /* Texto que pousa sobre um tint — o tint e a cor de marca são o mesmo
+     matiz, então a cor de texto precisa de um degrau extra de contraste. */
+  --text-on-tint:var(--color-blue-700);
+  --text-on-accent-tint:var(--color-orange-800);
+
+  /* Feedback — o par -bg/-text é o que o Badge consome; o token sem sufixo
+     fica para ícone, borda e superfície, onde não há requisito de leitura. */
+  --feedback-success:var(--color-green-600);
+  --feedback-warning:var(--color-amber-600);
+  --feedback-error:var(--color-red-600);
+  --feedback-info:var(--color-blue-600);
+  --feedback-success-bg:rgba(31,122,76,.12);
+  --feedback-warning-bg:rgba(180,114,14,.12);
+  --feedback-error-bg:rgba(192,57,43,.12);
+  --feedback-success-text:var(--color-green-700);
+  --feedback-warning-text:var(--color-amber-700);
+  --feedback-error-text:var(--color-red-700);
+
+  /* Foco — 3px de tint + borda action-primary (DS §10) */
+  --focus-ring:0 0 0 3px var(--color-blue-100);
+  --focus-outline:var(--action-primary);
+
+  /* Elevação — base no neutro morno, nunca preto puro */
+  --elevation-1:0 1px 2px 0 rgba(26,24,21,.06);
+  --elevation-2:0 4px 8px -2px rgba(26,24,21,.08);
+  --elevation-3:0 8px 16px -4px rgba(26,24,21,.10);
+  --elevation-4:0 16px 32px -8px rgba(26,24,21,.12);
+  --elevation-5:0 24px 48px -12px rgba(26,24,21,.16);
+
+  /* ==========================================================
+     TIER 2 · SEMANTIC — LAYOUT
+     Grid documentado no DS §03. Margens e gutters foram ancorados
+     na escala 8pt tokenizada (ver decisões no resumo do projeto).
+     ========================================================== */
+  --grid-max:1440px;
+  --grid-margin:var(--spacing-4xl);   /* desktop ≥1280 */
+  --grid-gutter:var(--spacing-lg);    /* 24px */
+  --measure:68ch;                     /* line-length máxima em texto corrido */
+  --navbar-h:64px;                    /* DS §13 — 64px desktop */
+  --control-h:40px;                   /* DS §09 — altura mínima de botão */
+  --section-y:var(--spacing-5xl);     /* break de seção — DS §04 */
+}
+
+/* ============================================================================
+   DARK MODE — resolvido só na camada semântica.
+   Nenhum componente é reescrito abaixo desta linha.
+   ============================================================================ */
+[data-theme="dark"]{
+  --bg-base:var(--color-ink-800);
+  --bg-surface:var(--color-ink-700);
+  --bg-surface-sunken:var(--color-ink-900);
+  --bg-inverse:var(--color-sand-0);
+  --bg-overlay:rgba(0,0,0,.62);
+
+  --text-primary:var(--color-ink-100);
+  --text-secondary:var(--color-ink-400);
+  --text-secondary-sm:var(--color-ink-300);
+  --text-brand:var(--color-blue-400);
+  --text-accent:var(--color-orange-400);
+  --text-on-action:var(--color-ink-900);
+  --text-inverse:var(--color-ink-900);
+
+  --border-default:rgba(240,237,231,.14);
+  --border-strong:rgba(240,237,231,.28);
+
+  --action-primary:var(--color-blue-400);
+  --action-primary-hover:#7B95FB;
+  --action-tint:rgba(92,124,250,.18);
+  --action-accent-tint:rgba(242,137,92,.18);
+  --text-on-tint:var(--color-blue-300);
+  --text-on-accent-tint:var(--color-orange-400);
+
+  --feedback-success:#4BB07C;
+  --feedback-warning:#D9A03C;
+  --feedback-error:#E0685A;
+  --feedback-info:var(--color-blue-400);
+  --feedback-success-bg:rgba(75,176,124,.14);
+  --feedback-warning-bg:rgba(217,160,60,.14);
+  --feedback-error-bg:rgba(224,104,90,.14);
+  /* No escuro os próprios 600 já passam AA sobre o tint — sem par extra. */
+  --feedback-success-text:var(--feedback-success);
+  --feedback-warning-text:var(--feedback-warning);
+  --feedback-error-text:var(--feedback-error);
+
+  --focus-ring:0 0 0 3px rgba(92,124,250,.25);
+
+  --elevation-1:0 1px 2px 0 rgba(0,0,0,.4);
+  --elevation-2:0 4px 8px -2px rgba(0,0,0,.5);
+  --elevation-3:0 8px 16px -4px rgba(0,0,0,.55);
+  --elevation-4:0 16px 32px -8px rgba(0,0,0,.6);
+  --elevation-5:0 24px 48px -12px rgba(0,0,0,.7);
+}
+
+/* ============================================================================
+   BREAKPOINTS — reatribuição de tokens, nunca de componentes.
+   Media query não aceita custom property: 1280 e 768 são literais por
+   limitação da linguagem, e são os do grid documentado no DS §03.
+   ============================================================================ */
+
+/* Tablet — 768px a 1279px · 8 colunas */
+@media (max-width:1279px){
+  :root{
+    --grid-margin:var(--spacing-2xl);
+    --section-y:var(--spacing-4xl);
+  }
+}
+
+/* Mobile — abaixo de 768px · 4 colunas.
+   Tipografia desce um degrau na mesma escala 1.250. */
+@media (max-width:767px){
+  :root{
+    --grid-margin:var(--spacing-lg);
+    --grid-gutter:var(--spacing-md);
+    --navbar-h:56px;                 /* DS §13 */
+    --control-h:44px;                /* alvo de toque — DS §09 */
+    --section-y:var(--spacing-3xl);
+
+    --font-display-size:40px;
+    --font-h1-size:34px;
+    --font-h2-size:28px;
+    --font-h3-size:24px;
+    --font-h4-size:20px;
+    --font-h5-size:18px;
+    --font-h6-size:16px;
+    --font-body-lg-size:17px;
+  }
+}

@@ -1,0 +1,8 @@
+# Gerado pelo passo de build do deploy (netlify.toml / vercel.json),
+# que copia o robots.txt da raiz para dentro da pasta publicada.
+site/robots.txt
+
+# Sistema operacional
+Thumbs.db
+desktop.ini
+.DS_Store
